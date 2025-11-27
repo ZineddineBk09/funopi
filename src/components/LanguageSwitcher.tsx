@@ -41,7 +41,7 @@ export default function LanguageSwitcher({
               key={option.locale}
               href="/"
               locale={option.locale}
-              className={`flex items-center gap-1 rounded-full px-2 py-1 text-[10px] font-semibold transition ${
+              className={`flex items-center gap-1 rounded-full px-1 py-[2px] text-[10px] font-semibold transition ${
                 isActive
                   ? "bg-[#b13b2a] !text-white shadow"
                   : "text-[#5a3b26] hover:text-[#b13b2a]"
