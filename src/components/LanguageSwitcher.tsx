@@ -32,7 +32,7 @@ export default function LanguageSwitcher({
     <div
       className={`flex items-center gap-2 text-xs uppercase tracking-[0.3em] ${className}`}
     >
-      <span className="text-[#b13b2a]">{t("language")}</span>
+      {/* <span className="text-[#b13b2a]">{t("language")}</span> */}
       <div className="flex gap-1">
         {LANG_OPTIONS.map((option) => {
           const isActive = option.locale === activeLocale;
