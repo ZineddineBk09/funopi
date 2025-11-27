@@ -1,36 +1,86 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+## Bored Button Clone
+
+A recreation of BoredButton.com built with Next.js (App Router), Tailwind CSS v4, and TypeScript. Visitors hit the red button to load a random distraction inside an iframe while ratings are logged to Google Sheets for later analysis.
 
 ## Getting Started
 
-First, run the development server:
-
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Visit `http://localhost:3000` to use the app. The homepage replicates the original Bored Button copy; `/play` hosts the iframe shell, sticky header, mini button, and star ratings.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Google Sheets Configuration
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Follow `GOOGLE_SHEETS_QUICK_REFERENCE.md` to provision a service account and share your sheet. Three environment variables are required in `.env.local`:
 
-## Learn More
+```
+GOOGLE_CLIENT_EMAIL=...
+GOOGLE_PRIVATE_KEY="-----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----\n"
+GOOGLE_SHEET_ID=your_sheet_id
+ADMIN_USERNAME=choose_an_email_or_name
+ADMIN_PASSWORD=choose_a_strong_password
+# Optional but recommended:
+ADMIN_SESSION_SECRET=random_long_string
+```
 
-To learn more about Next.js, take a look at the following resources:
+### `Games` Sheet (manages iframe list)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Create a tab named **Games** with the columns:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+| Column | Description                |
+| ------ | -------------------------- |
+| A      | Title (shown in header)    |
+| B      | URL (must allow iframes)   |
+| C      | Description (1-2 sentences)|
 
-## Deploy on Vercel
+When this sheet contains at least one valid URL, `/play` will pull exclusively from it. If the tab is empty or the request fails, the app falls back to the hard-coded list in `src/data/sites.ts`.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### `UsersRatings` Sheet (stores votes)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Create a tab named **UsersRatings** with columns:
+
+| Column | Description              |
+| ------ | ------------------------ |
+| A      | Site title               |
+| B      | Rating (1-5)             |
+| C      | Visitor ID (auto via localStorage) |
+| D      | User agent (optional)    |
+| E      | ISO timestamp            |
+
+The API appends a new row per vote and recomputes averages/counts on the fly.
+
+## Admin Console
+
+- Navigate manually to `/admin` (there are no public links).  
+- Sign in with `ADMIN_USERNAME` / `ADMIN_PASSWORD`. Successful logins issue a short-lived, httpOnly session cookie.
+- Dashboard features:
+  - Overview cards for games, ratings, and unique visitors (based on the stored visitor IDs).
+  - Top-rated list (top 5 experiences by average rating).
+  - Games manager to add, edit, or delete entries without touching the sheet directly.
+- Dedicated `/admin/ratings` visualization that charts every vote’s distribution per site (accessible only after signing in).
+- All admin APIs (`/api/admin/*`) are protected by the same session cookie, so credentials are required before any CRUD or stats calls execute.
+
+## Seeding the Google Sheet & Admin Credentials
+
+Use the helper script to copy the fallback list (`src/data/sites.ts`) into the `Games` tab and ensure `.env.local` has admin credentials:
+
+```bash
+GOOGLE_CLIENT_EMAIL=... GOOGLE_PRIVATE_KEY="..." GOOGLE_SHEET_ID=... npm run seed
+```
+
+- Provide `ADMIN_USERNAME`, `ADMIN_PASSWORD`, or `ADMIN_SESSION_SECRET` env vars to override the generated defaults.
+- The script appends any missing values to `.env.local` so the admin UI can be accessed immediately after seeding.
+
+## Commands
+
+| Script            | Purpose                           |
+| ----------------- | --------------------------------- |
+| `npm run dev`     | Start local dev server            |
+| `npm run lint`    | Run ESLint via `next lint`        |
+| `npx tsc --noEmit`| Type-check without emitting files |
+
+## Deployment
+
+Deploy to any Next.js-compatible platform (e.g., Vercel). Remember to set the three Google Sheets environment variables in your hosting dashboard so the live site can pull games and store ratings. If they are missing, the UI will silently fall back to the built-in sites and disable rating persistence.

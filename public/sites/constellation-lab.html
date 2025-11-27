@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Constellation Lab</title>
+    <style>
+      :root {
+        font-family: "Playfair Display", "Times New Roman", serif;
+        color: #fdf7ec;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: radial-gradient(circle at top, #0e233c, #01040a 75%);
+      }
+
+      main {
+        width: min(96vw, 1024px);
+        padding: 28px;
+        border-radius: 28px;
+        background: rgba(0, 0, 0, 0.7);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        box-shadow: 0 30px 70px rgba(0, 0, 0, 0.6);
+      }
+
+      h1 {
+        margin-top: 0;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        font-size: clamp(1.4rem, 2.3vw, 2.4rem);
+      }
+
+      #space {
+        display: block;
+        width: 100%;
+        height: min(60vh, 460px);
+        border-radius: 20px;
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        background: radial-gradient(circle at center, #10263f, #020812 70%);
+        cursor: pointer;
+      }
+
+      p {
+        margin-bottom: 16px;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>Constellation Lab</h1>
+      <p>
+        Set new stars in motion. Tap anywhere on the space panel to drop a star.
+        Stars pull toward your cursor and link up when they’re nearby, forming
+        shifting constellations.
+      </p>
+      <canvas id="space" width="1024" height="600" aria-label="Star canvas"></canvas>
+    </main>
+
+    <script>
+      const canvas = document.getElementById("space");
+      const ctx = canvas.getContext("2d");
+      const stars = [];
+      let pointer = null;
+
+      const resize = () => {
+        const rect = canvas.getBoundingClientRect();
+        const scale = window.devicePixelRatio || 1;
+        canvas.width = rect.width * scale;
+        canvas.height = rect.height * scale;
+        ctx.setTransform(1, 0, 0, 1, 0, 0);
+        ctx.scale(scale, scale);
+      };
+
+      const addStar = (x, y) => {
+        stars.push({
+          x,
+          y,
+          vx: (Math.random() - 0.5) * 0.6,
+          vy: (Math.random() - 0.5) * 0.6,
+          radius: 1.5 + Math.random() * 2,
+        });
+      };
+
+      const draw = () => {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = "rgba(255,255,255,0.8)";
+        const rect = canvas.getBoundingClientRect();
+
+        stars.forEach((star) => {
+          if (pointer) {
+            const dx = pointer.x - star.x;
+            const dy = pointer.y - star.y;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+            if (dist < 200) {
+              star.vx += dx / dist / 40;
+              star.vy += dy / dist / 40;
+            }
+          }
+
+          star.x += star.vx;
+          star.y += star.vy;
+          star.vx *= 0.99;
+          star.vy *= 0.99;
+
+          if (star.x < 0 || star.x > rect.width) star.vx *= -1;
+          if (star.y < 0 || star.y > rect.height) star.vy *= -1;
+        });
+
+        for (let i = 0; i < stars.length; i++) {
+          const a = stars[i];
+          for (let j = i + 1; j < stars.length; j++) {
+            const b = stars[j];
+            const dx = a.x - b.x;
+            const dy = a.y - b.y;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+            if (dist < 160) {
+              ctx.strokeStyle = `rgba(255,255,255,${1 - dist / 160})`;
+              ctx.lineWidth = 1;
+              ctx.beginPath();
+              ctx.moveTo(a.x, a.y);
+              ctx.lineTo(b.x, b.y);
+              ctx.stroke();
+            }
+          }
+        }
+
+        stars.forEach((star) => {
+          ctx.beginPath();
+          ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+          ctx.fill();
+        });
+
+        requestAnimationFrame(draw);
+      };
+
+      canvas.addEventListener("pointerdown", (event) => {
+        const rect = canvas.getBoundingClientRect();
+        addStar(event.clientX - rect.left, event.clientY - rect.top);
+      });
+
+      canvas.addEventListener("pointermove", (event) => {
+        const rect = canvas.getBoundingClientRect();
+        pointer = { x: event.clientX - rect.left, y: event.clientY - rect.top };
+      });
+
+      canvas.addEventListener("pointerleave", () => {
+        pointer = null;
+      });
+
+      resize();
+      window.addEventListener("resize", resize);
+      Array.from({ length: 20 }).forEach(() => {
+        const rect = canvas.getBoundingClientRect();
+        addStar(Math.random() * rect.width, Math.random() * rect.height);
+      });
+      draw();
+    </script>
+  </body>
+</html>
+

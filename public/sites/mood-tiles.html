@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Mood Tiles</title>
+    <style>
+      :root {
+        font-family: "Barlow", "Helvetica Neue", sans-serif;
+        color: #0d0d0d;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: radial-gradient(circle at top, #ffe1f2, #ffd9d0, #f8d78a);
+      }
+
+      main {
+        width: min(860px, 94vw);
+        padding: 32px;
+        border-radius: 32px;
+        background: rgba(255, 255, 255, 0.85);
+        box-shadow: 0 30px 60px rgba(255, 127, 80, 0.35);
+        border: 1px solid rgba(255, 255, 255, 0.65);
+      }
+
+      h1 {
+        margin: 0 0 10px;
+        font-size: clamp(1.8rem, 3.5vw, 3rem);
+      }
+
+      #grid {
+        margin-top: 24px;
+        display: grid;
+        gap: 12px;
+        grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+      }
+
+      .tile {
+        border-radius: 18px;
+        aspect-ratio: 1 / 1;
+        border: 1px solid rgba(0, 0, 0, 0.08);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.35rem;
+        font-weight: 600;
+        color: rgba(0, 0, 0, 0.6);
+        cursor: pointer;
+        transition: transform 160ms ease, box-shadow 160ms ease,
+          background 160ms ease;
+        background: rgba(255, 255, 255, 0.6);
+        box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.4);
+      }
+
+      .tile[data-active="true"] {
+        transform: translateY(-6px);
+        color: #1a0e05;
+        box-shadow: 0 18px 35px rgba(0, 0, 0, 0.18);
+      }
+
+      #mood {
+        margin-top: 20px;
+        font-size: 1.2rem;
+        letter-spacing: 0.04em;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>Mood Tiles</h1>
+      <p>
+        Tap tiles to set your mood palette. The phrase below adapts to the blend
+        of colors you’ve selected. Can you find a combination that feels just
+        right?
+      </p>
+      <div id="grid" aria-live="polite"></div>
+      <p id="mood">No tiles selected yet. Choose a vibe!</p>
+    </main>
+
+    <script>
+      const grid = document.getElementById("grid");
+      const mood = document.getElementById("mood");
+
+      const palette = [
+        { emoji: "🌸", color: "#ffb0d7", label: "gentle" },
+        { emoji: "🌞", color: "#ffd166", label: "radiant" },
+        { emoji: "🌊", color: "#7edce1", label: "calm" },
+        { emoji: "🌿", color: "#97d98c", label: "fresh" },
+        { emoji: "🔥", color: "#ff8360", label: "bold" },
+        { emoji: "🌌", color: "#7a5be6", label: "dreamy" },
+        { emoji: "🍋", color: "#f9f871", label: "zippy" },
+        { emoji: "🪩", color: "#b28dff", label: "glam" },
+        { emoji: "🌧", color: "#8fb8ed", label: "melodic" },
+        { emoji: "🍓", color: "#ff6b8b", label: "sweet" },
+        { emoji: "🧊", color: "#b4f1f9", label: "frosty" },
+        { emoji: "🌋", color: "#f45b69", label: "stormy" },
+      ];
+
+      const active = new Set();
+
+      const descriptions = {
+        0: "No tiles selected yet. Choose a vibe!",
+        1: "A single hue is making a statement.",
+        2: "Two tones mingle to set today’s tone.",
+        3: "A triad of moods is humming softly.",
+      };
+
+      const updateMood = () => {
+        const labels = Array.from(active).map((index) => palette[index].label);
+        let message =
+          descriptions[Math.min(labels.length, 3)] ||
+          "A full mosaic of feelings glows at once.";
+        if (labels.length) {
+          message += ` Current palette: ${labels.join(", ")}.`;
+        }
+        mood.textContent = message;
+      };
+
+      palette.forEach((swatch, index) => {
+        const tile = document.createElement("button");
+        tile.className = "tile";
+        tile.type = "button";
+        tile.innerHTML = `<span>${swatch.emoji}</span>`;
+        tile.style.setProperty("--color", swatch.color);
+        tile.addEventListener("click", () => {
+          const isActive = tile.dataset.active === "true";
+          tile.dataset.active = !isActive ? "true" : "";
+          tile.style.background = !isActive
+            ? `radial-gradient(circle, ${swatch.color}, ${swatch.color}88)`
+            : "rgba(255,255,255,0.6)";
+          if (!isActive) {
+            active.add(index);
+          } else {
+            active.delete(index);
+          }
+          updateMood();
+        });
+        grid.appendChild(tile);
+      });
+
+      updateMood();
+    </script>
+  </body>
+</html>
+

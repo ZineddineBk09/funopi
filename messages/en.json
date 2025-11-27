@@ -1,0 +1,215 @@
+{
+  "button": {
+    "ariaLabel": "Launch a random Funopi experience"
+  },
+  "home": {
+    "tagline": "FUNOPI™ • WWW.FUNOPI.COM",
+    "headline": "Need a dopamine hit?",
+    "subhead": "Tap the glowing play button and let Funopi pick your next distraction.",
+    "description": "Funopi is a nostalgic portal of arcade-inspired curiosities curated to cure boredom on demand. Each press launches a safe, iframe-friendly mini experience hand-picked for classrooms, offices, and late-night scrollers. From <bold>Age Geek</bold> memories to interactive doodling pads and neon particle toys, the lineup refreshes constantly. Park your cursor on the molten play button, press it, and let random joy stream in.",
+    "submit": "Submit a Toy",
+    "terms": "About Funopi",
+    "privacy": "Privacy Policy",
+    "contact": "Contact Us",
+    "footer": "© {year} Funopi Labs"
+  },
+  "play": {
+    "heading": "Funopi is playing",
+    "subtitle": "Need a new vibe? Press play again.",
+    "navHome": "Home",
+    "navRemoveFrame": "Remove Frame",
+    "button": "Spin the Funopi wheel again",
+    "sourceSheet": "Source: Google Sheet",
+    "sourceFallback": "Source: Fallback list",
+    "loadError": "Unable to load the latest games. Showing the built-in list instead.",
+    "fallbackTitle": "No sites configured yet.",
+    "fallbackBody": "Add URLs to your Google Sheet named “Games” or populate the fallback list in src/data/sites.ts.",
+    "fallbackCta": "Return Home"
+  },
+  "ratings": {
+    "title": "Rate this site",
+    "averageCount": "{average} ({count})",
+    "saving": "Saving your rating...",
+    "thanks": "Thanks for your rating!",
+    "empty": "No ratings yet — be the first!",
+    "already": "You already rated this site. Come back after we rotate in new fun.",
+    "alreadyShort": "You already rated this site. Thanks!",
+    "loadError": "Unable to load ratings right now.",
+    "submitError": "Unable to submit rating right now.",
+    "visitorError": "Unable to create a visitor id. Please try again."
+  },
+  "about": {
+    "title": "Who we are",
+    "intro": "Welcome to Funopi — every press takes you somewhere new!",
+    "body": "Funopi is an experimental entertainment portal built on one simple rule: a single glowing play button unlocks a surprise website. We scout the web for curious, delightful, and even useful destinations, then deliver them at random so every visit feels fresh.",
+    "listTitle": "What makes Funopi special?",
+    "items": [
+      "Fast, lightweight experience",
+      "Family-friendly fun for all ages",
+      "No registration required",
+      "Zero onboarding friction"
+    ],
+    "goal": "Our goal is to become your launchpad for instant amusement and web discovery. We add hand-picked destinations every day so there’s always a new world waiting behind the button.",
+    "cta": "Welcome to the Funopi universe — one tap, infinite worlds."
+  },
+  "privacy": {
+    "title": "Privacy Policy — Funopi",
+    "intro": "At Funopi we respect your privacy and keep the experience lightweight. Here’s the short version:",
+    "sections": [
+      {
+        "heading": "1. Information we collect",
+        "points": [
+          "No sign-up, no personal data required.",
+          "We may use cookies purely to improve site speed and performance.",
+          "Analytics tools such as Google Analytics help us understand usage trends without collecting personally identifiable information."
+        ]
+      },
+      {
+        "heading": "2. How we use data",
+        "points": [
+          "To refine the experience and keep it smooth.",
+          "We never sell or share data with third parties for commercial gain."
+        ]
+      },
+      {
+        "heading": "3. External links",
+        "points": [
+          "Funopi sends you to third-party websites. We aren’t responsible for their content or privacy practices, so please review their policies when you land there."
+        ]
+      },
+      {
+        "heading": "4. Ads",
+        "points": [
+          "We may display third-party ads (e.g., Google AdSense). They might use tracking technologies to serve relevant ads."
+        ]
+      },
+      {
+        "heading": "5. Data protection",
+        "points": [
+          "We follow recognized security practices to guard against abuse, intrusion, and misuse."
+        ]
+      },
+      {
+        "heading": "6. Policy updates",
+        "points": [
+          "We might update this policy occasionally. Any changes will appear on this page."
+        ]
+      }
+    ],
+    "questions": "Have questions or requests? Reach out via our Contact page."
+  },
+  "contact": {
+    "title": "Contact Funopi",
+    "intro": "We’d love to hear from you. Share ideas, suggest new sites, or report hiccups—every note helps us keep the button magical.",
+    "body": "Whether you have a new website to recommend, feedback for the platform, or a technical issue to report, we’re ready.",
+    "emailLabel": "Email us at:",
+    "response": "We respond as soon as possible."
+  },
+  "admin": {
+    "login": {
+      "title": "Admin Access",
+      "subtitle": "Enter the credentials provided to your team to manage games and stats.",
+      "username": "Username",
+      "password": "Password",
+      "submit": "Enter",
+      "submitting": "Signing in...",
+      "error": "Unable to log in."
+    },
+    "dashboard": {
+      "tagline": "Funopi Admin",
+      "welcome": "Welcome back",
+      "lastRefreshed": "Last refreshed {timestamp}",
+      "ratingsView": "Ratings view",
+      "logout": "Log out",
+      "stats": {
+        "active": "Active games",
+        "sheet": "Sheet games",
+        "ratings": "Total ratings",
+        "visitors": "Unique visitors"
+      },
+      "topRatedTitle": "Top Rated Experiences",
+      "topRatedEmpty": "No ratings yet. Encourage players to leave stars!",
+      "topRatedScore": "{average} / 5 ({count, plural, one {# rating} other {# ratings}})",
+      "refreshStatsButton": "Refresh stats",
+      "manageTitle": "Manage Games",
+      "manageSubtitle": "Update the rotation without touching Google Sheets.",
+      "reload": "Reload",
+      "addNew": "Add new",
+      "searchLabel": "Search",
+      "searchPlaceholder": "Filter by title...",
+      "clear": "Clear",
+      "emptyList": "No sheet games yet. Use the form to add your first entry.",
+      "noMatch": "No games match that title. Try another search.",
+      "sheetRow": "Sheet row {row}",
+      "edit": "Edit",
+      "delete": "Delete",
+      "formAddHeading": "Add new game",
+      "formEditing": "Editing row {row}",
+      "formTitle": "Title",
+      "formUrl": "URL",
+      "formDescription": "Description",
+      "formSaving": "Saving...",
+      "formSubmitAdd": "Add game",
+      "formSubmitUpdate": "Update game",
+      "formCancel": "Cancel",
+      "messages": {
+        "refreshStatsError": "Unable to refresh stats.",
+        "refreshGamesError": "Unable to refresh games.",
+        "formRequired": "Title and URL are required.",
+        "saveSuccess": "Game saved successfully.",
+        "saveError": "Unable to save game.",
+        "deleteConfirm": "Delete this game from the rotation?",
+        "deleteSuccess": "Game removed.",
+        "deleteError": "Unable to delete game.",
+        "previewError": "Unable to load preview right now."
+      },
+      "preview": {
+        "title": "Preview",
+        "noDescription": "No description provided.",
+        "close": "Close",
+        "loading": "Loading preview…",
+        "average": "Average rating",
+        "total": "Total ratings",
+        "removeFrameLabel": "Remove Frame",
+        "removeFrameLink": "Open site ↗",
+        "embedTitle": "Embed diagnostics",
+        "status": "Status",
+        "xFrame": "X-Frame-Options",
+        "csp": "Content-Security-Policy",
+        "error": "Error",
+        "none": "None detected",
+        "statusUnknown": "Unknown",
+        "statusOk": "OK",
+        "buttonAria": "Preview {title}"
+      }
+    },
+    "ratings": {
+      "tagline": "Ratings Overview",
+      "title": "Site Sentiment",
+      "description": "Review individual experiences, their average scores, and the most recent feedback timelines.",
+      "back": "← Back to dashboard",
+      "export": "Export CSV",
+      "empty": "No ratings yet. Encourage visitors to press the button and leave a review!",
+      "lastRating": "Last rating {timestamp}",
+      "lastRatingNone": "No ratings yet.",
+      "ratingValue": "{value} / 5",
+      "countLabel": "{count, plural, one {# rating} other {# ratings}}",
+      "showDetails": "Show details",
+      "hideDetails": "Hide details",
+      "loading": "Loading recent ratings…",
+      "detailError": "Unable to load details.",
+      "noHistory": "No historical ratings yet for this site.",
+      "bars": {
+        "average": "Average",
+        "volume": "Volume"
+      },
+      "table": {
+        "rating": "Rating",
+        "visitor": "Visitor",
+        "userAgent": "User agent",
+        "timestamp": "Timestamp"
+      }
+    }
+  }
+}
+
