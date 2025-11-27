@@ -110,8 +110,6 @@ export default function PlayPage() {
             {gamesError && <p className="text-xs text-red-600">{gamesError}</p>}
           </div>
           <nav className="flex items-center gap-3 text-sm text-[#a02a2a]">
-            <LanguageSwitcher variant="inline" />
-            <span>•</span>
             <Link href="/" className="hover:underline">
               {t("navHome")}
             </Link>
