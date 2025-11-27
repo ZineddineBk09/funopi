@@ -83,7 +83,7 @@ export default function RatingControl({ site }: Props) {
         setUserHasRated(false);
       }
     },
-    [site, t],
+    [site, t]
   );
 
   useEffect(() => {
@@ -144,9 +144,13 @@ export default function RatingControl({ site }: Props) {
     }
   };
 
+  if (userHasRated) {
+    return null;
+  }
+
   return (
     <div className="flex flex-col gap-1">
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-1 md:gap-2">
         <p className="text-xs uppercase tracking-[0.35em] text-[#b13b2a]">
           {t("title")}
         </p>
@@ -159,14 +163,14 @@ export default function RatingControl({ site }: Props) {
           </span>
         )}
       </div>
-      <div className="flex items-center gap-1">
+      <div className="flex items-center md:gap-1">
         {STAR_VALUES.map((value) => {
           const isFilled = value <= displayedValue;
           return (
             <button
               key={value}
               type="button"
-              className="group rounded-full p-1 transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#f2c4a2]"
+              className="group rounded-full p-[2px] md:p-1 transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#f2c4a2]"
               aria-label={`Rate ${value} out of 5`}
               onMouseEnter={() => setHoverValue(value)}
               onMouseLeave={() => setHoverValue(null)}
@@ -216,8 +220,8 @@ function StarIcon({ filled, dimmed }: StarProps) {
           filled
             ? "#f4b544"
             : dimmed
-              ? "rgba(210, 200, 186, 0.7)"
-              : "rgba(117, 92, 70, 0.4)"
+            ? "rgba(210, 200, 186, 0.7)"
+            : "rgba(117, 92, 70, 0.4)"
         }
         stroke="#ac7a3a"
         strokeWidth="0.8"

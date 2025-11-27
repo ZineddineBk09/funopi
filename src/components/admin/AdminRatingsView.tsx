@@ -77,7 +77,7 @@ export default function AdminRatingsView({ summaries }: Props) {
   };
 
   return (
-    <div className="min-h-screen bg-[#f7f4eb] px-4 py-10 text-[#2b1d11]">
+    <div className="min-h-screen bg-white px-4 py-10 text-[#2b1d11]">
       <div className="mx-auto max-w-5xl space-y-10">
         <header className="rounded-2xl border border-[#d5c7b5] bg-white/85 px-6 py-5 shadow">
           <p className="text-xs uppercase tracking-[0.35em] text-[#b13b2a]">

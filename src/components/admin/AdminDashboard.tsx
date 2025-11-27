@@ -229,7 +229,7 @@ export default function AdminDashboard({ initialStats, initialGames }: Props) {
   };
 
   return (
-    <div className="min-h-screen bg-[#f7f4eb] px-4 py-10 text-[#2b1d11]">
+    <div className="min-h-screen bg-white px-4 py-10 text-[#2b1d11]">
       <div className="mx-auto max-w-6xl space-y-10">
         <header className="flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-[#d5c7b5] bg-white/80 px-6 py-4 shadow">
           <div>

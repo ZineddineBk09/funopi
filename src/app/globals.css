@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 :root {
-  --paper: #faf6ed;
+  --paper: #ffffff;
   --ink: #2c1b10;
   --accent: #c41521;
 }

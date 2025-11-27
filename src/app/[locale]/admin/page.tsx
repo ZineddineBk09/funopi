@@ -7,6 +7,12 @@ import AdminLoginForm from "@/components/admin/AdminLoginForm";
 import AdminDashboard from "@/components/admin/AdminDashboard";
 import { buildAdminStats } from "@/lib/adminStats";
 import { fetchSheetGameRecords } from "@/lib/games";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Admin Dashboard",
+  description: "Admin dashboard for Funopi",
+};
 
 export default async function AdminPage() {
   const cookieStore = await cookies();
@@ -15,7 +21,7 @@ export default async function AdminPage() {
 
   if (!session) {
     return (
-      <main className="flex min-h-screen items-center justify-center bg-[#f7f4eb] px-4">
+      <main className="flex min-h-screen items-center justify-center bg-white px-4">
         <AdminLoginForm />
       </main>
     );

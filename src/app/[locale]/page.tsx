@@ -3,7 +3,6 @@
 import { useTranslations } from "next-intl";
 import BoredButton from "@/components/BoredButton";
 import { Link, useRouter } from "@/i18n/navigation";
-import LanguageSwitcher from "@/components/LanguageSwitcher";
 
 export default function HomePage() {
   const router = useRouter();
@@ -34,10 +33,10 @@ export default function HomePage() {
         </p>
 
         <div className="mt-12 flex flex-wrap items-center justify-center gap-4 text-sm text-[#a02a2a]">
-          {/* <Link href="#submit" className="hover:underline">
-            {t("submit")}
-          </Link> */}
-          {/* <span>•</span> */}
+          <Link href="/top-rated" className="hover:underline">
+            {t("topRatedLink")}
+          </Link>
+          <span>•</span>
           <Link href="/about" className="hover:underline">
             {t("terms")}
           </Link>

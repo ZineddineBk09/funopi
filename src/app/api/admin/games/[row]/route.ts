@@ -16,13 +16,14 @@ function unauthorized() {
 
 export async function PUT(
   request: Request,
-  { params }: { params: { row: string } },
+  context: { params: Promise<{ row: string }> },
 ) {
   const cookieStore = await cookies();
   const token = cookieStore.get(ADMIN_SESSION_COOKIE_NAME)?.value;
   if (!verifyAdminSessionToken(token)) return unauthorized();
 
-  const rowNumber = Number(params.row);
+  const { row } = await context.params;
+  const rowNumber = Number(row);
   if (!Number.isInteger(rowNumber) || rowNumber < 2) {
     return NextResponse.json({ error: "Invalid row number." }, { status: 400 });
   }
@@ -55,13 +56,14 @@ export async function PUT(
 
 export async function DELETE(
   _request: Request,
-  { params }: { params: { row: string } },
+  context: { params: Promise<{ row: string }> },
 ) {
   const cookieStore = await cookies();
   const token = cookieStore.get(ADMIN_SESSION_COOKIE_NAME)?.value;
   if (!verifyAdminSessionToken(token)) return unauthorized();
 
-  const rowNumber = Number(params.row);
+  const { row } = await context.params;
+  const rowNumber = Number(row);
   if (!Number.isInteger(rowNumber) || rowNumber < 2) {
     return NextResponse.json({ error: "Invalid row number." }, { status: 400 });
   }

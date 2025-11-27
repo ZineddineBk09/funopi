@@ -19,14 +19,22 @@ const spectral = Spectral({
   weight: ["400", "500"],
 });
 
-const funopiKeywords = [
-  "Funopi",
-  "funopi.com",
-  "random game generator",
-  "press play boredom cure",
-  "retro web toys",
-  ...sites.map((site) => site.title),
-];
+const funopiKeywords = Array.from(
+  new Set([
+    "Funopi",
+    "funopi.com",
+    "random game generator",
+    "press play boredom cure",
+    "retro web toys",
+    "iframe friendly games",
+    "classroom safe boredom button",
+    "micro web experiments",
+    "random website button",
+    "top rated fun sites",
+    "funopi leaderboard",
+    ...sites.map((site) => site.title),
+  ])
+);
 
 const description =
   "Funopi is your retro-styled boredom antidote. Smash the glowing play button to launch curated web toys like " +
@@ -48,6 +56,7 @@ export const metadata: Metadata = {
   keywords: funopiKeywords,
   category: "entertainment",
   creator: "Zineddine Benkhaled",
+  authors: [{ name: "Zineddine Benkhaled" }],
   alternates: {
     canonical: "/",
     languages: {
@@ -108,10 +117,43 @@ export default async function LocaleLayout({
           locale={locale}
           timeZone={Intl.DateTimeFormat().resolvedOptions().timeZone}
         >
-          <LanguageSwitcher hideOnAdmin />
+          {/* <LanguageSwitcher hideOnAdmin={false} /> */}
+          <StructuredData locale={locale} />
           {children}
         </NextIntlClientProvider>
       </body>
     </html>
+  );
+}
+
+function StructuredData({ locale }: { locale: string }) {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: "Funopi",
+    url: baseUrl.toString(),
+    description,
+    inLanguage: locale,
+    logo: `${baseUrl}/funopi-preview.png`,
+    sameAs: ["https://www.funopi.com"],
+    potentialAction: [
+      {
+        "@type": "SearchAction",
+        target: `${baseUrl}/play?tag={search_term_string}`,
+        "query-input": "required name=search_term_string",
+      },
+      {
+        "@type": "ViewAction",
+        name: "Press play",
+        target: `${baseUrl}/play`,
+      },
+    ],
+  };
+
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+    />
   );
 }

@@ -6,6 +6,12 @@ import {
 import AdminLoginForm from "@/components/admin/AdminLoginForm";
 import AdminRatingsView from "@/components/admin/AdminRatingsView";
 import { buildSiteRatingSummaries } from "@/lib/adminRatings";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Admin Ratings",
+  description: "Admin ratings for Funopi",
+};
 
 export default async function AdminRatingsPage() {
   const cookieStore = await cookies();
@@ -14,7 +20,7 @@ export default async function AdminRatingsPage() {
 
   if (!session) {
     return (
-      <main className="flex min-h-screen items-center justify-center bg-[#f7f4eb] px-4">
+      <main className="flex min-h-screen items-center justify-center bg-white px-4">
         <AdminLoginForm />
       </main>
     );
