@@ -14,6 +14,8 @@
     "terms": "About Funopi",
     "privacy": "Privacy Policy",
     "contact": "Contact Us",
+    "topRatedLink": "Top Rated",
+    "languageLabel": "Language",
     "footer": "© {year} Funopi Labs"
   },
   "play": {
@@ -27,10 +29,12 @@
     "loadError": "Unable to load the latest games. Showing the built-in list instead.",
     "fallbackTitle": "No sites configured yet.",
     "fallbackBody": "Add URLs to your Google Sheet named “Games” or populate the fallback list in src/data/sites.ts.",
-    "fallbackCta": "Return Home"
+    "fallbackCta": "Return Home",
+    "loadingSelection": "Loading your selection…",
+    "loadingHint": "Hang tight while we fetch that exact experience."
   },
   "ratings": {
-    "title": "Rate this site",
+    "title": "Rate this game",
     "averageCount": "{average} ({count})",
     "saving": "Saving your rating...",
     "thanks": "Thanks for your rating!",
@@ -107,6 +111,18 @@
     "body": "Whether you have a new website to recommend, feedback for the platform, or a technical issue to report, we’re ready.",
     "emailLabel": "Email us at:",
     "response": "We respond as soon as possible."
+  },
+  "topRatedPage": {
+    "tagline": "Funopi Leaderboard",
+    "title": "Top Rated Experiences",
+    "description": "See which Funopi experiences are climbing the charts. Rankings refresh every time someone leaves new stars.",
+    "backHome": "Back to Funopi",
+    "empty": "No rated experiences yet. Press play and be the first to leave a review!",
+    "lastRated": "Last rating {date}",
+    "noRatings": "Awaiting the first rating",
+    "average": "{value} / 5 ★",
+    "noAverage": "Not rated yet",
+    "ratingsCount": "{count, plural, one {{count} rating} other {{count} ratings}}"
   },
   "admin": {
     "login": {
