@@ -27,7 +27,7 @@ const PRIVATE_KEY = process.env.GOOGLE_PRIVATE_KEY?.replace(/\\n/g, "\n");
 function assertSheetsConfig() {
   if (!SHEET_ID || !CLIENT_EMAIL || !PRIVATE_KEY) {
     throw new Error(
-      "Missing Google Sheets credentials. Please set GOOGLE_CLIENT_EMAIL, GOOGLE_PRIVATE_KEY, and GOOGLE_SHEET_ID."
+      "Missing Google Sheets credentials. Please set GOOGLE_CLIENT_EMAIL, GOOGLE_PRIVATE_KEY, and GOOGLE_SHEET_ID.",
     );
   }
 }
@@ -35,7 +35,7 @@ function assertSheetsConfig() {
 function parseSitesFile() {
   const source = fs.readFileSync(SITES_FILE, "utf8");
   const match = source.match(
-    /export const sites\s*(?::\s*[^=]+)?=\s*(\[[\s\S]*?\]);/
+    /export const sites\s*(?::\s*[^=]+)?=\s*(\[[\s\S]*?\]);/,
   );
   if (!match) {
     throw new Error("Unable to locate sites array in src/data/sites.ts");
@@ -98,7 +98,9 @@ async function seedGames(sites) {
 }
 
 function randomString(length = 10) {
-  return Math.random().toString(36).substring(2, 2 + length);
+  return Math.random()
+    .toString(36)
+    .substring(2, 2 + length);
 }
 
 function seedAdminEnv() {
@@ -123,7 +125,8 @@ function seedAdminEnv() {
     return;
   }
 
-  const needsNewline = envExists && envContent.length && !envContent.endsWith("\n");
+  const needsNewline =
+    envExists && envContent.length && !envContent.endsWith("\n");
   const prefix = envExists && needsNewline ? "\n" : envExists ? "" : "";
   fs.appendFileSync(ENV_FILE, `${prefix}${updates.join("\n")}\n`);
   console.log("Updated .env.local with admin credentials:");
@@ -143,4 +146,3 @@ async function main() {
 }
 
 main();
-

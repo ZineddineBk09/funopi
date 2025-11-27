@@ -16,7 +16,7 @@ function unauthorized() {
 
 export async function PUT(
   request: Request,
-  { params }: { params: { row: string } }
+  { params }: { params: { row: string } },
 ) {
   const cookieStore = await cookies();
   const token = cookieStore.get(ADMIN_SESSION_COOKIE_NAME)?.value;
@@ -32,7 +32,7 @@ export async function PUT(
     if (!title || !url) {
       return NextResponse.json(
         { error: "Title and URL are required." },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -48,14 +48,14 @@ export async function PUT(
     console.error("Failed to update admin game:", error);
     return NextResponse.json(
       { error: "Unable to update game." },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
 
 export async function DELETE(
   _request: Request,
-  { params }: { params: { row: string } }
+  { params }: { params: { row: string } },
 ) {
   const cookieStore = await cookies();
   const token = cookieStore.get(ADMIN_SESSION_COOKIE_NAME)?.value;
@@ -74,8 +74,7 @@ export async function DELETE(
     console.error("Failed to delete admin game:", error);
     return NextResponse.json(
       { error: "Unable to delete game." },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
-

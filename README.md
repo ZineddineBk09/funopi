@@ -29,11 +29,11 @@ ADMIN_SESSION_SECRET=random_long_string
 
 Create a tab named **Games** with the columns:
 
-| Column | Description                |
-| ------ | -------------------------- |
-| A      | Title (shown in header)    |
-| B      | URL (must allow iframes)   |
-| C      | Description (1-2 sentences)|
+| Column | Description                 |
+| ------ | --------------------------- |
+| A      | Title (shown in header)     |
+| B      | URL (must allow iframes)    |
+| C      | Description (1-2 sentences) |
 
 When this sheet contains at least one valid URL, `/play` will pull exclusively from it. If the tab is empty or the request fails, the app falls back to the hard-coded list in `src/data/sites.ts`.
 
@@ -41,19 +41,19 @@ When this sheet contains at least one valid URL, `/play` will pull exclusively f
 
 Create a tab named **UsersRatings** with columns:
 
-| Column | Description              |
-| ------ | ------------------------ |
-| A      | Site title               |
-| B      | Rating (1-5)             |
+| Column | Description                        |
+| ------ | ---------------------------------- |
+| A      | Site title                         |
+| B      | Rating (1-5)                       |
 | C      | Visitor ID (auto via localStorage) |
-| D      | User agent (optional)    |
-| E      | ISO timestamp            |
+| D      | User agent (optional)              |
+| E      | ISO timestamp                      |
 
 The API appends a new row per vote and recomputes averages/counts on the fly.
 
 ## Admin Console
 
-- Navigate manually to `/admin` (there are no public links).  
+- Navigate manually to `/admin` (there are no public links).
 - Sign in with `ADMIN_USERNAME` / `ADMIN_PASSWORD`. Successful logins issue a short-lived, httpOnly session cookie.
 - Dashboard features:
   - Overview cards for games, ratings, and unique visitors (based on the stored visitor IDs).
@@ -75,11 +75,11 @@ GOOGLE_CLIENT_EMAIL=... GOOGLE_PRIVATE_KEY="..." GOOGLE_SHEET_ID=... npm run see
 
 ## Commands
 
-| Script            | Purpose                           |
-| ----------------- | --------------------------------- |
-| `npm run dev`     | Start local dev server            |
-| `npm run lint`    | Run ESLint via `next lint`        |
-| `npx tsc --noEmit`| Type-check without emitting files |
+| Script             | Purpose                           |
+| ------------------ | --------------------------------- |
+| `npm run dev`      | Start local dev server            |
+| `npm run lint`     | Run ESLint via `next lint`        |
+| `npx tsc --noEmit` | Type-check without emitting files |
 
 ## Deployment
 

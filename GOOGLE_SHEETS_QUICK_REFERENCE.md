@@ -3,6 +3,7 @@
 ## 🚀 Quick Setup (5 Minutes)
 
 ### 1. Google Cloud Setup
+
 ```bash
 1. Go to: https://console.cloud.google.com/
 2. Create new project
@@ -12,6 +13,7 @@
 ```
 
 ### 2. Google Sheet Setup
+
 ```bash
 1. Create new Google Sheet
 2. Add headers in Row 1: First Name | Last Name | Email | Phone | etc.
@@ -20,6 +22,7 @@
 ```
 
 ### 3. Environment Variables
+
 ```env
 GOOGLE_CLIENT_EMAIL=your-service-account@project.iam.gserviceaccount.com
 GOOGLE_PRIVATE_KEY="-----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----\n"
@@ -27,6 +30,7 @@ GOOGLE_SHEET_ID=your_sheet_id_from_url
 ```
 
 ### 4. Install Package
+
 ```bash
 npm install googleapis
 ```
@@ -36,6 +40,7 @@ npm install googleapis
 ## 📦 Essential Code
 
 ### Basic Setup (`src/lib/google-sheets.ts`)
+
 ```typescript
 import { google } from "googleapis";
 
@@ -52,6 +57,7 @@ export const SHEET_ID = process.env.GOOGLE_SHEET_ID;
 ```
 
 ### Read Data
+
 ```typescript
 const response = await sheets.spreadsheets.values.get({
   spreadsheetId: SHEET_ID,
@@ -61,6 +67,7 @@ const rows = response.data.values || [];
 ```
 
 ### Write Data (Append)
+
 ```typescript
 await sheets.spreadsheets.values.append({
   spreadsheetId: SHEET_ID,
@@ -73,6 +80,7 @@ await sheets.spreadsheets.values.append({
 ```
 
 ### Update Data
+
 ```typescript
 await sheets.spreadsheets.values.update({
   spreadsheetId: SHEET_ID,
@@ -88,28 +96,32 @@ await sheets.spreadsheets.values.update({
 
 ## 🔍 Common Ranges
 
-| Range | Description |
-|-------|-------------|
-| `Sheet1!A:A` | Entire column A |
-| `Sheet1!A:J` | Columns A through J |
-| `Sheet1!A2:J` | Column A-J, starting row 2 |
-| `Sheet1!A2:J100` | Specific range |
-| `Sheet1!C:C` | Single column (e.g., emails) |
+| Range            | Description                  |
+| ---------------- | ---------------------------- |
+| `Sheet1!A:A`     | Entire column A              |
+| `Sheet1!A:J`     | Columns A through J          |
+| `Sheet1!A2:J`    | Column A-J, starting row 2   |
+| `Sheet1!A2:J100` | Specific range               |
+| `Sheet1!C:C`     | Single column (e.g., emails) |
 
 ---
 
 ## 🐛 Common Issues & Fixes
 
 ### "Caller does not have permission"
+
 → Share sheet with service account email
 
 ### "Private key is invalid"
+
 → Check newlines: `"-----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----\n"`
 
 ### "Entity was not found"
+
 → Verify GOOGLE_SHEET_ID is correct
 
 ### Environment vars not loading
+
 → Restart dev server after changing .env
 
 ---
@@ -117,20 +129,22 @@ await sheets.spreadsheets.values.update({
 ## 📊 Sheet Organization
 
 ### Recommended Structure
+
 ```
 Row 1 (Headers): Field1 | Field2 | Field3 | ... | Timestamp
 Row 2+: Data rows
 ```
 
 ### Column Mapping
+
 ```typescript
 const COLUMNS = {
-  FIRST_NAME: 'A',
-  LAST_NAME: 'B',
-  EMAIL: 'C',
-  PHONE: 'D',
+  FIRST_NAME: "A",
+  LAST_NAME: "B",
+  EMAIL: "C",
+  PHONE: "D",
   // ... etc
-  TIMESTAMP: 'J',
+  TIMESTAMP: "J",
 };
 ```
 
@@ -161,13 +175,13 @@ const COLUMNS = {
 
 ```typescript
 // test-sheets.ts
-import { sheets, SHEET_ID } from './src/lib/google-sheets';
+import { sheets, SHEET_ID } from "./src/lib/google-sheets";
 
 async function test() {
   const response = await sheets.spreadsheets.get({
     spreadsheetId: SHEET_ID,
   });
-  console.log('Connected to:', response.data.properties?.title);
+  console.log("Connected to:", response.data.properties?.title);
 }
 test();
 ```
@@ -181,6 +195,7 @@ npx ts-node test-sheets.ts
 ## 📈 When to Migrate
 
 Consider moving to a real database when:
+
 - Dataset > 10,000 rows
 - Traffic > 100 requests/minute
 - Need complex queries
@@ -195,4 +210,3 @@ Consider moving to a real database when:
 - [Google Cloud Console](https://console.cloud.google.com/)
 - [Google Sheets API Docs](https://developers.google.com/sheets/api)
 - [googleapis npm](https://www.npmjs.com/package/googleapis)
-

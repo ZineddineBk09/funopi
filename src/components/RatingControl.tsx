@@ -20,7 +20,10 @@ const STAR_VALUES = [1, 2, 3, 4, 5] as const;
 const LOCAL_STORAGE_KEY = "bored_user_id";
 
 const generateVisitorId = () => {
-  if (typeof crypto !== "undefined" && typeof crypto.randomUUID === "function") {
+  if (
+    typeof crypto !== "undefined" &&
+    typeof crypto.randomUUID === "function"
+  ) {
     return crypto.randomUUID();
   }
   return `visitor-${Date.now()}-${Math.random().toString(36).slice(2, 10)}`;
@@ -54,8 +57,8 @@ export default function RatingControl({ site }: Props) {
 
   const fetchStats = useCallback(
     async (visitorId?: string | null) => {
-    setError(null);
-    setMessage(null);
+      setError(null);
+      setMessage(null);
       try {
         const params = new URLSearchParams({ site });
         if (visitorId) {
@@ -65,7 +68,7 @@ export default function RatingControl({ site }: Props) {
           cache: "no-store",
         });
         if (!response.ok) {
-        throw new Error(t("loadError"));
+          throw new Error(t("loadError"));
         }
         const data = (await response.json()) as RatingResponse;
         setStats({
@@ -80,7 +83,7 @@ export default function RatingControl({ site }: Props) {
         setUserHasRated(false);
       }
     },
-    [site, t]
+    [site, t],
   );
 
   useEffect(() => {
@@ -181,18 +184,12 @@ export default function RatingControl({ site }: Props) {
         )}
       </div>
       {error && <p className="text-xs text-red-600">{error}</p>}
-      {!error && message && (
-        <p className="text-xs text-[#5f4634]">{message}</p>
-      )}
+      {!error && message && <p className="text-xs text-[#5f4634]">{message}</p>}
       {!error && !message && stats.count === 0 && (
-        <p className="text-xs italic text-[#8a6c52]">
-          {t("empty")}
-        </p>
+        <p className="text-xs italic text-[#8a6c52]">{t("empty")}</p>
       )}
       {!error && userHasRated && (
-        <p className="text-xs text-[#8a6c52]">
-          {t("already")}
-        </p>
+        <p className="text-xs text-[#8a6c52]">{t("already")}</p>
       )}
     </div>
   );
@@ -219,8 +216,8 @@ function StarIcon({ filled, dimmed }: StarProps) {
           filled
             ? "#f4b544"
             : dimmed
-            ? "rgba(210, 200, 186, 0.7)"
-            : "rgba(117, 92, 70, 0.4)"
+              ? "rgba(210, 200, 186, 0.7)"
+              : "rgba(117, 92, 70, 0.4)"
         }
         stroke="#ac7a3a"
         strokeWidth="0.8"
@@ -228,4 +225,3 @@ function StarIcon({ filled, dimmed }: StarProps) {
     </svg>
   );
 }
-

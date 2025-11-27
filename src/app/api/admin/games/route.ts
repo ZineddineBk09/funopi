@@ -4,10 +4,7 @@ import {
   ADMIN_SESSION_COOKIE_NAME,
   verifyAdminSessionToken,
 } from "@/lib/adminAuth";
-import {
-  appendSheetGame,
-  fetchSheetGameRecords,
-} from "@/lib/games";
+import { appendSheetGame, fetchSheetGameRecords } from "@/lib/games";
 
 function unauthorized() {
   return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
@@ -25,7 +22,7 @@ export async function GET() {
     console.error("Failed to fetch admin games:", error);
     return NextResponse.json(
       { error: "Unable to load games." },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
@@ -40,7 +37,7 @@ export async function POST(request: Request) {
     if (!title || !url) {
       return NextResponse.json(
         { error: "Title and URL are required." },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -56,8 +53,7 @@ export async function POST(request: Request) {
     console.error("Failed to create admin game:", error);
     return NextResponse.json(
       { error: "Unable to save game." },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
-

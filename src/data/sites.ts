@@ -42,4 +42,3 @@ export const sites: BoredSite[] = [
     description: "Tap tiles to build the color palette that matches your vibe.",
   },
 ];
-

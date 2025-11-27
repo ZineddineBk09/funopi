@@ -13,7 +13,7 @@ export async function POST(request: Request) {
     if (typeof username !== "string" || typeof password !== "string") {
       return NextResponse.json(
         { error: "Invalid credentials payload." },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -21,7 +21,7 @@ export async function POST(request: Request) {
     if (!isValid) {
       return NextResponse.json(
         { error: "Invalid username or password." },
-        { status: 401 }
+        { status: 401 },
       );
     }
 
@@ -40,8 +40,7 @@ export async function POST(request: Request) {
     console.error("Admin login failed:", error);
     return NextResponse.json(
       { error: "Unable to log in right now." },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
-

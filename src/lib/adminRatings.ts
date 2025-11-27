@@ -35,8 +35,7 @@ function buildSummaries(rows: RatingRow[]): SiteRatingSummary[] {
   return Array.from(map.entries()).map(([title, info]) => ({
     title,
     count: info.count,
-    average:
-      info.count > 0 ? Number((info.sum / info.count).toFixed(2)) : null,
+    average: info.count > 0 ? Number((info.sum / info.count).toFixed(2)) : null,
     lastRatingAt: info.lastRatingAt ?? null,
   }));
 }
@@ -47,7 +46,6 @@ export async function buildSiteRatingSummaries(): Promise<SiteRatingSummary[]> {
     (a, b) =>
       (b.average ?? 0) - (a.average ?? 0) ||
       b.count - a.count ||
-      (b.lastRatingAt ?? "").localeCompare(a.lastRatingAt ?? "")
+      (b.lastRatingAt ?? "").localeCompare(a.lastRatingAt ?? ""),
   );
 }
-

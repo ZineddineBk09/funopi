@@ -6,7 +6,7 @@ export const SHEET_ID = process.env.GOOGLE_SHEET_ID;
 
 if (!clientEmail || !privateKey || !SHEET_ID) {
   console.warn(
-    "Google Sheets credentials are not fully configured. Check your environment variables."
+    "Google Sheets credentials are not fully configured. Check your environment variables.",
   );
 }
 
@@ -19,4 +19,3 @@ const auth = new google.auth.GoogleAuth({
 });
 
 export const sheets = google.sheets({ version: "v4", auth });
-

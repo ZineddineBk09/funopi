@@ -112,4 +112,3 @@ export async function loadGamesWithFallback(): Promise<{
 
   return { sites: fallbackSites, source: "fallback" };
 }
-

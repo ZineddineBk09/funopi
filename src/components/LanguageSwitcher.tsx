@@ -2,11 +2,12 @@
 
 import Image from "next/image";
 import { useLocale, useTranslations } from "next-intl";
-import { Link } from "@/i18n/navigation";
+import { Link, usePathname } from "@/i18n/navigation";
 
 type Props = {
   variant?: "floating" | "inline";
   className?: string;
+  hideOnAdmin?: boolean;
 };
 
 const LANG_OPTIONS = [
@@ -17,9 +18,15 @@ const LANG_OPTIONS = [
 export default function LanguageSwitcher({
   variant = "floating",
   className = "",
+  hideOnAdmin = false,
 }: Props) {
   const activeLocale = useLocale();
   const t = useTranslations("common");
+  const pathname = usePathname();
+
+  if (hideOnAdmin && pathname?.includes("/admin")) {
+    return null;
+  }
 
   const content = (
     <div
@@ -36,7 +43,7 @@ export default function LanguageSwitcher({
               locale={option.locale}
               className={`flex items-center gap-1 rounded-full px-2 py-1 text-[10px] font-semibold transition ${
                 isActive
-                  ? "bg-[#b13b2a] text-white shadow"
+                  ? "bg-[#b13b2a] !text-white shadow"
                   : "text-[#5a3b26] hover:text-[#b13b2a]"
               }`}
             >
@@ -66,4 +73,3 @@ export default function LanguageSwitcher({
     </div>
   );
 }
-

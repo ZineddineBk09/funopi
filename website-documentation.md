@@ -35,17 +35,16 @@ Format: Array of objects.
 
 // data/sites.ts
 export const sites = [
-  {
-    title: "The Useless Web",
-    url: "[https://theuselessweb.com/](https://theuselessweb.com/)", // Example
-  },
-  {
-    title: "Quick Draw",
-    url: "[https://quickdraw.withgoogle.com/](https://quickdraw.withgoogle.com/)",
-  },
-  // ... add 10-20 placeholder iframe-friendly URLs
+{
+title: "The Useless Web",
+url: "[https://theuselessweb.com/](https://theuselessweb.com/)", // Example
+},
+{
+title: "Quick Draw",
+url: "[https://quickdraw.withgoogle.com/](https://quickdraw.withgoogle.com/)",
+},
+// ... add 10-20 placeholder iframe-friendly URLs
 ];
-
 
 4. Component Architecture
 
@@ -157,7 +156,7 @@ Add the <iframe>.
 Implement the randomization logic in a function shuffleSite().
 
 Step 6: "Remove Frame" Feature
-In the header, add a link that points directly to sites[currentSiteIndex].url with target="_blank".
+In the header, add a link that points directly to sites[currentSiteIndex].url with target="\_blank".
 
 7. Prompt for AI (Copy/Paste this to Cursor Composer)
 

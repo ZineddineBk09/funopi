@@ -89,7 +89,7 @@ export async function appendRating({
 
 export async function getRatingStats(
   site: string,
-  rows?: RatingRow[]
+  rows?: RatingRow[],
 ): Promise<RatingStats> {
   if (rows) {
     return calculateStats(rows);
@@ -105,7 +105,7 @@ export type RatingDetails = RatingStats & {
 
 export async function getRatingDetails(
   site: string,
-  userId?: string | null
+  userId?: string | null,
 ): Promise<RatingDetails> {
   const siteRows = await getSiteRows(site);
   return {
@@ -113,4 +113,3 @@ export async function getRatingDetails(
     userHasRated: userHasRated(siteRows, userId),
   };
 }
-

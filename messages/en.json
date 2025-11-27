@@ -1,4 +1,7 @@
 {
+  "common": {
+    "language": "Language"
+  },
   "button": {
     "ariaLabel": "Launch a random Funopi experience"
   },
@@ -212,4 +215,3 @@
     }
   }
 }
-

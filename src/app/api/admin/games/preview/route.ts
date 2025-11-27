@@ -22,7 +22,7 @@ export async function POST(request: Request) {
     if (!title || !url) {
       return NextResponse.json(
         { error: "Title and URL are required." },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -36,7 +36,7 @@ export async function POST(request: Request) {
     console.error("Preview fetch failed:", error);
     return NextResponse.json(
       { error: "Unable to load preview." },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
@@ -60,4 +60,3 @@ async function checkEmbedStatus(url: string) {
     };
   }
 }
-

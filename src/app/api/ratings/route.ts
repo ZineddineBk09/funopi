@@ -14,7 +14,7 @@ export async function GET(request: Request) {
   if (!site) {
     return NextResponse.json(
       { error: "Missing site parameter." },
-      { status: 400 }
+      { status: 400 },
     );
   }
 
@@ -27,7 +27,7 @@ export async function GET(request: Request) {
     console.error("GET /api/ratings error", error);
     return NextResponse.json(
       { error: "Unable to fetch rating." },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
@@ -39,14 +39,14 @@ export async function POST(request: Request) {
     if (!site || typeof site !== "string") {
       return NextResponse.json(
         { error: "Invalid site value." },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
     if (!userId || typeof userId !== "string") {
       return NextResponse.json(
         { error: "Missing user identifier." },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -58,7 +58,7 @@ export async function POST(request: Request) {
     ) {
       return NextResponse.json(
         { error: "Rating must be an integer between 1 and 5." },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -66,7 +66,7 @@ export async function POST(request: Request) {
     if (userHasRated(siteRows, userId)) {
       return NextResponse.json(
         { error: "You already rated this site.", userHasRated: true },
-        { status: 409 }
+        { status: 409 },
       );
     }
 
@@ -83,8 +83,7 @@ export async function POST(request: Request) {
     console.error("POST /api/ratings error", error);
     return NextResponse.json(
       { error: "Unable to save rating." },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
-

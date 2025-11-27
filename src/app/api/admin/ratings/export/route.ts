@@ -18,7 +18,7 @@ export async function GET() {
     const header = "Site,Rating,VisitorId,UserAgent,Timestamp\n";
     const body = rows
       .map((row) =>
-        [row[0], row[1], row[2], row[3], row[4]].map(csvEscape).join(",")
+        [row[0], row[1], row[2], row[3], row[4]].map(csvEscape).join(","),
       )
       .join("\n");
 
@@ -33,7 +33,7 @@ export async function GET() {
     console.error("Failed to export ratings:", error);
     return NextResponse.json(
       { error: "Unable to export ratings." },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
@@ -43,4 +43,3 @@ function csvEscape(value?: string | number | null) {
   const str = String(value).replace(/"/g, '""');
   return `"${str}"`;
 }
-

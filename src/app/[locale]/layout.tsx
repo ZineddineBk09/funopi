@@ -4,6 +4,7 @@ import { Playfair_Display, Spectral } from "next/font/google";
 import { sites } from "@/data/sites";
 import { routing } from "../../i18n/routing";
 import { NextIntlClientProvider, hasLocale } from "next-intl";
+import LanguageSwitcher from "@/components/LanguageSwitcher";
 import "../globals.css";
 
 const playfair = Playfair_Display({
@@ -46,6 +47,7 @@ export const metadata: Metadata = {
   description,
   keywords: funopiKeywords,
   category: "entertainment",
+  creator: "Zineddine Benkhaled",
   alternates: {
     canonical: "/",
     languages: {
@@ -85,10 +87,9 @@ export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }
 
-
 type LocaleLayoutProps = {
   children: React.ReactNode;
-  params: { locale: string };
+  params: Promise<{ locale: string }>;
 };
 
 export default async function LocaleLayout({
@@ -107,7 +108,7 @@ export default async function LocaleLayout({
           locale={locale}
           timeZone={Intl.DateTimeFormat().resolvedOptions().timeZone}
         >
-          <LanguageSwitcher locale={locale} />
+          <LanguageSwitcher hideOnAdmin />
           {children}
         </NextIntlClientProvider>
       </body>

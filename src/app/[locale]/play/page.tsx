@@ -7,6 +7,7 @@ import RatingControl from "@/components/RatingControl";
 import type { BoredSite } from "@/data/sites";
 import { sites as fallbackSites } from "@/data/sites";
 import { Link } from "@/i18n/navigation";
+import LanguageSwitcher from "@/components/LanguageSwitcher";
 
 const getRandomIndex = (length: number, exclude?: number) => {
   if (!length) return -1;
@@ -24,11 +25,11 @@ export default function PlayPage() {
   const [availableSites, setAvailableSites] =
     useState<BoredSite[]>(fallbackSites);
   const [gamesSource, setGamesSource] = useState<"sheet" | "fallback">(
-    fallbackSites.length ? "fallback" : "sheet"
+    fallbackSites.length ? "fallback" : "sheet",
   );
   const [gamesError, setGamesError] = useState<string | null>(null);
   const [currentIndex, setCurrentIndex] = useState(() =>
-    fallbackSites.length ? getRandomIndex(fallbackSites.length) : 0
+    fallbackSites.length ? getRandomIndex(fallbackSites.length) : 0,
   );
 
   useEffect(() => {
@@ -66,7 +67,7 @@ export default function PlayPage() {
 
   const currentSite = useMemo(
     () => availableSites[currentIndex],
-    [availableSites, currentIndex]
+    [availableSites, currentIndex],
   );
 
   const cycleSite = useCallback(() => {
@@ -106,11 +107,11 @@ export default function PlayPage() {
                 ? t("sourceSheet")
                 : t("sourceFallback")}
             </p> */}
-            {gamesError && (
-              <p className="text-xs text-red-600">{gamesError}</p>
-            )}
+            {gamesError && <p className="text-xs text-red-600">{gamesError}</p>}
           </div>
           <nav className="flex items-center gap-3 text-sm text-[#a02a2a]">
+            <LanguageSwitcher variant="inline" />
+            <span>•</span>
             <Link href="/" className="hover:underline">
               {t("navHome")}
             </Link>
@@ -149,4 +150,3 @@ export default function PlayPage() {
     </div>
   );
 }
-

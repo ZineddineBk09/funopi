@@ -28,4 +28,3 @@ export default async function AdminPage() {
 
   return <AdminDashboard initialStats={stats} initialGames={games} />;
 }
-

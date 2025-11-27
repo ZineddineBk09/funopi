@@ -41,7 +41,7 @@ function buildTopRated(rows: RatingRow[]): TopRatedEntry[] {
       (a, b) =>
         b.average - a.average ||
         b.count - a.count ||
-        a.title.localeCompare(b.title)
+        a.title.localeCompare(b.title),
     )
     .slice(0, 5);
 }
@@ -53,10 +53,9 @@ export async function buildAdminStats(): Promise<AdminStats> {
   ]);
 
   const fallbackCount = fallbackSites.length;
-  const activeGames =
-    sheetGames.length > 0 ? sheetGames.length : fallbackCount;
+  const activeGames = sheetGames.length > 0 ? sheetGames.length : fallbackCount;
   const uniqueVisitors = new Set(
-    ratingRows.map((row) => row[2]).filter((id): id is string => Boolean(id))
+    ratingRows.map((row) => row[2]).filter((id): id is string => Boolean(id)),
   ).size;
 
   return {
@@ -69,5 +68,3 @@ export async function buildAdminStats(): Promise<AdminStats> {
     lastUpdated: new Date().toISOString(),
   };
 }
-
-

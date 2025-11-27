@@ -7,4 +7,3 @@ export async function POST() {
   cookieStore.delete(ADMIN_SESSION_COOKIE_NAME);
   return NextResponse.json({ success: true });
 }
-

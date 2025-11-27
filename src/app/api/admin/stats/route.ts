@@ -15,13 +15,14 @@ export async function GET() {
 
   try {
     const stats = await buildAdminStats();
-    return NextResponse.json(stats, { headers: { "Cache-Control": "no-store" } });
+    return NextResponse.json(stats, {
+      headers: { "Cache-Control": "no-store" },
+    });
   } catch (error) {
     console.error("Failed to build admin stats:", error);
     return NextResponse.json(
       { error: "Unable to load stats." },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
-

@@ -5,6 +5,7 @@ import { useTranslations } from "next-intl";
 import { Link, useRouter } from "@/i18n/navigation";
 import type { AdminStats } from "@/lib/adminStats";
 import type { SheetGameRecord } from "@/lib/games";
+import LanguageSwitcher from "@/components/LanguageSwitcher";
 
 type Props = {
   initialStats: AdminStats;
@@ -35,7 +36,7 @@ export default function AdminDashboard({ initialStats, initialGames }: Props) {
   const [pending, setPending] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [previewTarget, setPreviewTarget] = useState<SheetGameRecord | null>(
-    null
+    null,
   );
   const [previewData, setPreviewData] = useState<{
     loading: boolean;
@@ -66,7 +67,7 @@ export default function AdminDashboard({ initialStats, initialGames }: Props) {
     } catch (err) {
       console.error(err);
       setError(
-        err instanceof Error ? err.message : t("messages.refreshStatsError")
+        err instanceof Error ? err.message : t("messages.refreshStatsError"),
       );
     }
   };
@@ -84,7 +85,7 @@ export default function AdminDashboard({ initialStats, initialGames }: Props) {
     } catch (err) {
       console.error(err);
       setError(
-        err instanceof Error ? err.message : t("messages.refreshGamesError")
+        err instanceof Error ? err.message : t("messages.refreshGamesError"),
       );
     }
   };
@@ -217,8 +218,7 @@ export default function AdminDashboard({ initialStats, initialGames }: Props) {
     } catch (err) {
       setPreviewData({
         loading: false,
-        error:
-          err instanceof Error ? err.message : t("messages.previewError"),
+        error: err instanceof Error ? err.message : t("messages.previewError"),
       });
     }
   };
@@ -244,7 +244,11 @@ export default function AdminDashboard({ initialStats, initialGames }: Props) {
             </p>
           </div>
           <div className="flex flex-wrap items-center gap-3 text-xs uppercase tracking-[0.3em]">
-            <Link href="/admin/ratings" className="text-[#5a3b26] hover:underline">
+            <LanguageSwitcher variant="inline" />
+            <Link
+              href="/admin/ratings"
+              className="text-[#5a3b26] hover:underline"
+            >
               {t("ratingsView")}
             </Link>
             <button
@@ -456,8 +460,8 @@ export default function AdminDashboard({ initialStats, initialGames }: Props) {
                   {pending
                     ? t("formSaving")
                     : editingRow
-                    ? t("formSubmitUpdate")
-                    : t("formSubmitAdd")}
+                      ? t("formSubmitUpdate")
+                      : t("formSubmitAdd")}
                 </button>
                 {editingRow && (
                   <button
@@ -488,7 +492,9 @@ export default function AdminDashboard({ initialStats, initialGames }: Props) {
                 <p className="text-xs uppercase tracking-[0.35em] text-[#b13b2a]">
                   {t("preview.title")}
                 </p>
-                <h2 className="text-2xl font-semibold">{previewTarget.title}</h2>
+                <h2 className="text-2xl font-semibold">
+                  {previewTarget.title}
+                </h2>
                 <p className="text-sm text-[#7a5b45]">
                   {previewTarget.description || t("preview.noDescription")}
                 </p>

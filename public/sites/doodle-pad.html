@@ -62,7 +62,9 @@
         letter-spacing: 0.08em;
         font-size: 0.75rem;
         cursor: pointer;
-        transition: transform 120ms ease, box-shadow 120ms ease;
+        transition:
+          transform 120ms ease,
+          box-shadow 120ms ease;
         background: #edd9bf;
         box-shadow: inset 0 -2px 0 rgba(0, 0, 0, 0.15);
       }
@@ -96,14 +98,14 @@
         <button data-tool="color" data-value="#2d1c09" data-active="true">
           Sepia Ink
         </button>
-        <button data-tool="color" data-value="#c0392b"> Retro Red </button>
-        <button data-tool="color" data-value="#1f618d"> Blueprint </button>
-        <button data-tool="color" data-value="#117a65"> Green Chalk </button>
+        <button data-tool="color" data-value="#c0392b">Retro Red</button>
+        <button data-tool="color" data-value="#1f618d">Blueprint</button>
+        <button data-tool="color" data-value="#117a65">Green Chalk</button>
         <button data-tool="weight" data-value="2" data-active="true">
           Thin
         </button>
-        <button data-tool="weight" data-value="6"> Medium </button>
-        <button data-tool="weight" data-value="12"> Bold </button>
+        <button data-tool="weight" data-value="6">Medium</button>
+        <button data-tool="weight" data-value="12">Bold</button>
         <button data-tool="clear">New Sheet</button>
       </div>
 
@@ -173,7 +175,7 @@
           color = button.dataset.value;
           setActive(
             document.querySelectorAll('[data-tool="color"]'),
-            button.dataset.value
+            button.dataset.value,
           );
         });
       });
@@ -183,14 +185,16 @@
           weight = Number(button.dataset.value);
           setActive(
             document.querySelectorAll('[data-tool="weight"]'),
-            button.dataset.value
+            button.dataset.value,
           );
         });
       });
 
-      document.querySelector('[data-tool="clear"]').addEventListener("click", () => {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-      });
+      document
+        .querySelector('[data-tool="clear"]')
+        .addEventListener("click", () => {
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+        });
 
       canvas.addEventListener("pointerdown", (event) => {
         canvas.setPointerCapture(event.pointerId);
@@ -208,4 +212,3 @@
     </script>
   </body>
 </html>
-

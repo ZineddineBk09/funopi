@@ -40,9 +40,7 @@ export default function AdminLoginForm() {
       <h1 className="text-center text-2xl font-semibold text-[#2b1d11]">
         {t("title")}
       </h1>
-      <p className="mt-2 text-center text-sm text-[#6f5240]">
-        {t("subtitle")}
-      </p>
+      <p className="mt-2 text-center text-sm text-[#6f5240]">{t("subtitle")}</p>
       <form className="mt-6 flex flex-col gap-4" onSubmit={handleSubmit}>
         <label className="text-sm font-semibold text-[#4b2f1e]">
           {t("username")}
@@ -78,4 +76,3 @@ export default function AdminLoginForm() {
     </div>
   );
 }
-

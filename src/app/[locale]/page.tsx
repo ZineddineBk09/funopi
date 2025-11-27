@@ -3,6 +3,7 @@
 import { useTranslations } from "next-intl";
 import BoredButton from "@/components/BoredButton";
 import { Link, useRouter } from "@/i18n/navigation";
+import LanguageSwitcher from "@/components/LanguageSwitcher";
 
 export default function HomePage() {
   const router = useRouter();
@@ -56,4 +57,3 @@ export default function HomePage() {
     </main>
   );
 }
-

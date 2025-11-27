@@ -3,7 +3,9 @@ import crypto from "node:crypto";
 const ADMIN_USERNAME = process.env.ADMIN_USERNAME;
 const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD;
 const ADMIN_SESSION_SECRET =
-  process.env.ADMIN_SESSION_SECRET || process.env.ADMIN_PASSWORD || "bored-secret";
+  process.env.ADMIN_SESSION_SECRET ||
+  process.env.ADMIN_PASSWORD ||
+  "bored-secret";
 
 const SESSION_COOKIE = "admin_session";
 const SESSION_TTL_SECONDS = 60 * 60 * 12; // 12 hours
@@ -36,7 +38,7 @@ function decodePayload(token: string): TokenPayload | null {
 export function validateAdminCredentials(username: string, password: string) {
   if (!ADMIN_USERNAME || !ADMIN_PASSWORD) {
     throw new Error(
-      "ADMIN_USERNAME and ADMIN_PASSWORD must be configured in environment variables."
+      "ADMIN_USERNAME and ADMIN_PASSWORD must be configured in environment variables.",
     );
   }
   return username === ADMIN_USERNAME && password === ADMIN_PASSWORD;
@@ -80,4 +82,3 @@ export function verifyAdminSessionToken(token?: string | null) {
 
 export const ADMIN_SESSION_COOKIE_NAME = SESSION_COOKIE;
 export const ADMIN_SESSION_MAX_AGE = SESSION_TTL_SECONDS;
-

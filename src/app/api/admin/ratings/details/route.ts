@@ -20,7 +20,7 @@ export async function GET(request: Request) {
   if (!site) {
     return NextResponse.json(
       { error: "Missing site parameter." },
-      { status: 400 }
+      { status: 400 },
     );
   }
 
@@ -47,7 +47,7 @@ export async function GET(request: Request) {
     console.error("Failed to load rating details:", error);
     return NextResponse.json(
       { error: "Unable to load rating details." },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
@@ -62,4 +62,3 @@ function snippet(value?: string | null) {
   if (!value) return "—";
   return value.length > 80 ? `${value.slice(0, 77)}…` : value;
 }
-
