@@ -143,7 +143,7 @@ export default function PlayPage() {
               <span>•</span>
               <a
                 href={currentSite.url}
-                target="_blank"
+                // target="_blank"
                 rel="noreferrer"
                 className="hover:underline"
               >
